@@ -30,6 +30,23 @@ const getAvatarStyle = (name) => {
   };
 };
 
+const getTodayDateString = () => {
+  const d = new Date();
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const getNextHourTimeString = () => {
+  const d = new Date();
+  d.setHours(d.getHours() + 1);
+  d.setMinutes(0);
+  const hours = String(d.getHours()).padStart(2, '0');
+  const minutes = String(d.getMinutes()).padStart(2, '0');
+  return `${hours}:${minutes}`;
+};
+
 function App() {
   // Database States
   const [meets, setMeets] = useState([]);
@@ -46,7 +63,8 @@ function App() {
     name: '',
     gid: '',
     meetLink: '',
-    timing: '',
+    date: getTodayDateString(),
+    time: getNextHourTimeString(),
     duration: '60'
   });
   const [formErrors, setFormErrors] = useState({});
@@ -184,10 +202,10 @@ function App() {
       }
     }
 
-    if (!formData.timing) {
-      errors.timing = "Date and time details are required";
+    if (!formData.date || !formData.time) {
+      errors.timing = "Both date and time details are required";
     } else {
-      const selectedTime = new Date(formData.timing);
+      const selectedTime = new Date(`${formData.date}T${formData.time}`);
       const cutoff = new Date(Date.now() - 1.5 * 60 * 60 * 1000); // 1.5 hours ago
       
       if (isNaN(selectedTime.getTime())) {
@@ -230,7 +248,7 @@ function App() {
     setSubmitting(true);
     try {
       // Build ISO Date String
-      const isoDateTime = new Date(formData.timing).toISOString();
+      const isoDateTime = new Date(`${formData.date}T${formData.time}`).toISOString();
       
       await submitMeet({
         name: formData.name,
@@ -246,7 +264,8 @@ function App() {
         name: '',
         gid: '',
         meetLink: '',
-        timing: '',
+        date: getTodayDateString(),
+        time: getNextHourTimeString(),
         duration: '60'
       });
       setFormErrors({});
@@ -581,19 +600,39 @@ function App() {
                   {formErrors.meetLink && <span className="error-text">{formErrors.meetLink}</span>}
                 </div>
 
-                <div className="form-group">
-                  <label className="form-label">Meet Date & Time</label>
-                  <input 
-                    type="datetime-local" 
-                    name="timing" 
-                    className={`form-input ${formErrors.timing ? 'error' : ''}`}
-                    value={formData.timing}
-                    onChange={handleInputChange}
-                    disabled={submitting}
-                  />
-                  <span className="form-tip">Select when the event starts (local system time).</span>
-                  {formErrors.timing && <span className="error-text">{formErrors.timing}</span>}
+                <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <label className="form-label">Meet Date</label>
+                    <div className="input-with-icon" style={{ position: 'relative' }}>
+                      <Calendar size={16} className="input-icon-left" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--neutral-gray)', pointerEvents: 'none' }} />
+                      <input 
+                        type="date" 
+                        name="date" 
+                        className={`form-input ${formErrors.timing ? 'error' : ''}`}
+                        style={{ paddingLeft: '38px' }}
+                        value={formData.date}
+                        onChange={handleInputChange}
+                        disabled={submitting}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <label className="form-label">Start Time</label>
+                    <div className="input-with-icon" style={{ position: 'relative' }}>
+                      <Clock size={16} className="input-icon-left" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--neutral-gray)', pointerEvents: 'none' }} />
+                      <input 
+                        type="time" 
+                        name="time" 
+                        className={`form-input ${formErrors.timing ? 'error' : ''}`}
+                        style={{ paddingLeft: '38px' }}
+                        value={formData.time}
+                        onChange={handleInputChange}
+                        disabled={submitting}
+                      />
+                    </div>
+                  </div>
                 </div>
+                {formErrors.timing && <span className="error-text" style={{ marginTop: '-8px', display: 'block', marginBottom: '16px' }}>{formErrors.timing}</span>}
 
                 <div className="form-group">
                   <label className="form-label">Approx. Duration (minutes) <span style={{ color: 'var(--google-red)', fontSize: '11px', fontWeight: 'normal' }}>*approx</span></label>
