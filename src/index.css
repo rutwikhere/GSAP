@@ -4,18 +4,18 @@
   --font-title: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
 
-  /* Google Brand Palette */
-  --google-blue: #1a73e8;
-  --google-red: #ea4335;
-  --google-yellow: #fbbc05;
-  --google-green: #34a853;
+  /* Brand Palette */
+  --brand-blue: #1a73e8;
+  --brand-red: #ea4335;
+  --brand-yellow: #fbbc05;
+  --brand-green: #34a853;
 
   /* Hover and Light States */
-  --google-blue-hover: #1557b0;
-  --google-blue-light: #e8f0fe;
-  --google-red-light: #fce8e6;
-  --google-yellow-light: #fef7e0;
-  --google-green-light: #e6f4ea;
+  --brand-blue-hover: #1557b0;
+  --brand-blue-light: #e8f0fe;
+  --brand-red-light: #fce8e6;
+  --brand-yellow-light: #fef7e0;
+  --brand-green-light: #e6f4ea;
 
   /* Neutral Colors */
   --neutral-dark: #202124;
@@ -86,10 +86,10 @@ body {
   height: 10px;
   border-radius: var(--radius-full);
 }
-.logo-dot.blue { background-color: var(--google-blue); }
-.logo-dot.red { background-color: var(--google-red); }
-.logo-dot.yellow { background-color: var(--google-yellow); }
-.logo-dot.green { background-color: var(--google-green); }
+.logo-dot.blue { background-color: var(--brand-blue); }
+.logo-dot.red { background-color: var(--brand-red); }
+.logo-dot.yellow { background-color: var(--brand-yellow); }
+.logo-dot.green { background-color: var(--brand-green); }
 
 .nav-title {
   font-family: var(--font-title);
@@ -120,13 +120,13 @@ body {
 }
 
 .badge-db.firebase {
-  background-color: var(--google-green-light);
-  color: var(--google-green);
+  background-color: var(--brand-green-light);
+  color: var(--brand-green);
   border: 1px solid rgba(52, 168, 83, 0.2);
 }
 
 .badge-db.local {
-  background-color: var(--google-yellow-light);
+  background-color: var(--brand-yellow-light);
   color: #b06000;
   border: 1px solid rgba(251, 188, 5, 0.3);
 }
@@ -160,7 +160,7 @@ body {
 .hero-bg-shapes::before {
   width: 300px;
   height: 300px;
-  background-color: var(--google-blue);
+  background-color: var(--brand-blue);
   top: -150px;
   left: -50px;
 }
@@ -168,7 +168,7 @@ body {
 .hero-bg-shapes::after {
   width: 250px;
   height: 250px;
-  background-color: var(--google-yellow);
+  background-color: var(--brand-yellow);
   bottom: -100px;
   right: -50px;
 }
@@ -182,8 +182,8 @@ body {
 
 .hero-badge {
   display: inline-block;
-  background-color: var(--google-blue-light);
-  color: var(--google-blue);
+  background-color: var(--brand-blue-light);
+  color: var(--brand-blue);
   font-size: 14px;
   font-weight: 600;
   padding: 6px 16px;
@@ -230,13 +230,13 @@ body {
 }
 
 .btn-primary {
-  background-color: var(--google-blue);
+  background-color: var(--brand-blue);
   color: var(--bg-white);
   box-shadow: 0 2px 4px 0 rgba(26,115,232,0.2);
 }
 
 .btn-primary:hover {
-  background-color: var(--google-blue-hover);
+  background-color: var(--brand-blue-hover);
   box-shadow: 0 4px 8px 0 rgba(26,115,232,0.3);
   transform: translateY(-1px);
 }
@@ -290,9 +290,9 @@ body {
   justify-content: center;
 }
 
-.stat-icon.blue { background-color: var(--google-blue-light); color: var(--google-blue); }
-.stat-icon.green { background-color: var(--google-green-light); color: var(--google-green); }
-.stat-icon.yellow { background-color: var(--google-yellow-light); color: #b06000; }
+.stat-icon.blue { background-color: var(--brand-blue-light); color: var(--brand-blue); }
+.stat-icon.green { background-color: var(--brand-green-light); color: var(--brand-green); }
+.stat-icon.yellow { background-color: var(--brand-yellow-light); color: #b06000; }
 
 .stat-info {
   display: flex;
@@ -358,7 +358,7 @@ body {
 }
 
 .search-input:focus {
-  border-color: var(--google-blue);
+  border-color: var(--brand-blue);
   box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
 }
 
@@ -394,7 +394,7 @@ body {
 }
 
 .tab-btn.active {
-  color: var(--google-blue);
+  color: var(--brand-blue);
   font-weight: 600;
 }
 
@@ -405,7 +405,7 @@ body {
   left: 0;
   right: 0;
   height: 3px;
-  background-color: var(--google-blue);
+  background-color: var(--brand-blue);
   border-radius: 3px 3px 0 0;
 }
 
@@ -445,7 +445,7 @@ body {
   width: 48px;
   height: 48px;
   border-radius: var(--radius-sm);
-  background-color: var(--google-blue-light);
+  background-color: var(--brand-blue-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -486,21 +486,21 @@ body {
 }
 
 .status-badge.live {
-  background-color: var(--google-green-light);
-  color: var(--google-green);
+  background-color: var(--brand-green-light);
+  color: var(--brand-green);
   border: 1px solid rgba(52,168,83,0.3);
 }
 
 .status-badge.live .pulse-dot {
   width: 6px;
   height: 6px;
-  background-color: var(--google-green);
+  background-color: var(--brand-green);
   border-radius: var(--radius-full);
   animation: pulse-animation 1.5s infinite;
 }
 
 .status-badge.near {
-  background-color: var(--google-yellow-light);
+  background-color: var(--brand-yellow-light);
   color: #b06000;
   border: 1px solid rgba(251,188,5,0.4);
 }
@@ -508,14 +508,14 @@ body {
 .status-badge.near .pulse-dot {
   width: 6px;
   height: 6px;
-  background-color: var(--google-yellow);
+  background-color: var(--brand-yellow);
   border-radius: var(--radius-full);
   animation: pulse-animation 1.5s infinite;
 }
 
 .status-badge.upcoming {
-  background-color: var(--google-blue-light);
-  color: var(--google-blue);
+  background-color: var(--brand-blue-light);
+  color: var(--brand-blue);
   border: 1px solid rgba(26,115,232,0.2);
 }
 
@@ -549,7 +549,7 @@ body {
 }
 
 .btn-join {
-  background-color: var(--google-green);
+  background-color: var(--brand-green);
   color: var(--bg-white);
   font-family: var(--font-title);
   font-weight: 500;
@@ -574,9 +574,9 @@ body {
   font-size: 12px;
   font-weight: 600;
 }
-.meet-countdown.live { color: var(--google-green); }
+.meet-countdown.live { color: var(--brand-green); }
 .meet-countdown.near { color: #b06000; }
-.meet-countdown.upcoming { color: var(--google-blue); }
+.meet-countdown.upcoming { color: var(--brand-blue); }
 .meet-countdown.concluded { color: var(--neutral-gray); }
 
 /* Empty State Card */
@@ -643,7 +643,7 @@ body {
 }
 
 .modal-header-top {
-  border-top: 8px solid var(--google-blue); /* Google Forms Theme Accent */
+  border-top: 8px solid var(--brand-blue); /* Forms Theme Accent */
 }
 
 .modal-title {
@@ -700,12 +700,12 @@ body {
 }
 
 .form-input:focus {
-  border-color: var(--google-blue);
+  border-color: var(--brand-blue);
   box-shadow: 0 0 0 2px rgba(26,115,232,0.1);
 }
 
 .form-input.error {
-  border-color: var(--google-red);
+  border-color: var(--brand-red);
 }
 
 .form-input.error:focus {
@@ -714,7 +714,7 @@ body {
 
 .error-text {
   font-size: 12px;
-  color: var(--google-red);
+  color: var(--brand-red);
   margin-top: 2px;
 }
 
@@ -765,15 +765,15 @@ body {
   justify-content: space-between;
   box-shadow: var(--shadow-md);
   animation: slide-up-toast 0.2s ease-out;
-  border-left: 4px solid var(--google-blue);
+  border-left: 4px solid var(--brand-blue);
 }
 
 .toast.success {
-  border-left-color: var(--google-green);
+  border-left-color: var(--brand-green);
 }
 
 .toast.error {
-  border-left-color: var(--google-red);
+  border-left-color: var(--brand-red);
 }
 
 .toast-close {

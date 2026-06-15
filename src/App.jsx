@@ -7,10 +7,10 @@ import { fetchMeets, submitMeet, isRealFirebase } from './firebase';
 
 const getAvatarStyle = (name) => {
   const colors = [
-    { bg: '#e8f0fe', text: '#1a73e8' }, // Google Blue
-    { bg: '#fce8e6', text: '#ea4335' }, // Google Red
-    { bg: '#fef7e0', text: '#b06000' }, // Google Yellow
-    { bg: '#e6f4ea', text: '#34a853' }  // Google Green
+    { bg: '#e8f0fe', text: '#1a73e8' }, // Brand Blue
+    { bg: '#fce8e6', text: '#ea4335' }, // Brand Red
+    { bg: '#fef7e0', text: '#b06000' }, // Brand Yellow
+    { bg: '#e6f4ea', text: '#34a853' }  // Brand Green
   ];
   const charCode = (name || 'A').trim().charCodeAt(0);
   const style = colors[charCode % colors.length];
@@ -178,7 +178,7 @@ function App() {
     }
 
     if (!formData.gid.trim()) {
-      errors.gid = "Google Ambassador GID is required";
+      errors.gid = "College Network GID is required";
     } else if (formData.gid.trim().length < 4) {
       errors.gid = "GID must be at least 4 characters";
     }
@@ -187,13 +187,13 @@ function App() {
 
     const link = formData.meetLink.trim();
     if (!link) {
-      errors.meetLink = "Google Meet Link is required";
+      errors.meetLink = "Meet Link is required";
     } else {
       const linkLower = link.toLowerCase();
       if (linkLower.includes("instagram.com") || linkLower.includes("linkedin.com") || linkLower.includes("insta.open") || linkLower.includes("lnkd.in")) {
         errors.meetLink = "Social media links (LinkedIn, Instagram) are strictly prohibited!";
       } else if (!linkLower.startsWith("https://meet.google.com/")) {
-        errors.meetLink = "Must be a valid Google Meet link (starts with https://meet.google.com/)";
+        errors.meetLink = "Must be a valid Meet link (starts with https://meet.google.com/)";
       } else {
         const codePart = link.replace("https://meet.google.com/", "").split("?")[0];
         if (!codePart || codePart.trim().length < 5) {
@@ -220,7 +220,7 @@ function App() {
         meet => meet.meetLink.trim().toLowerCase() === link.trim().toLowerCase()
       );
       if (isDuplicate) {
-        errors.meetLink = "This Google Meet link has already been added!";
+        errors.meetLink = "This Meet link has already been added!";
       }
     }
 
@@ -348,7 +348,7 @@ function App() {
             <span className="logo-dot yellow"></span>
             <span className="logo-dot green"></span>
           </div>
-          <h1 className="nav-title">GDG Student Ambassadors <span>MeetPortal</span></h1>
+          <h1 className="nav-title">College Networks <span>MeetPortal</span></h1>
         </div>
         
         <div className="nav-right">
@@ -377,10 +377,10 @@ function App() {
       <section className="hero-section">
         <div className="hero-bg-shapes"></div>
         <div className="hero-content">
-          <div className="hero-badge">Google Student Ambassador Program</div>
+          <div className="hero-badge">College Networks</div>
           <h2 className="hero-title">Centralized Meet Schedule Directory</h2>
           <p className="hero-subtitle">
-            Ambassadors: Stop flooding WhatsApp groups with meet links! Post your Google Meets here. They will be sorted chronologically and flagged with Live/Starting Soon indicators automatically.
+            Members: Stop flooding WhatsApp groups with meet links! Post your meeting links here. They will be sorted chronologically and flagged with Live/Starting Soon indicators automatically.
           </p>
           <div className="hero-actions">
             <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>
@@ -521,7 +521,7 @@ function App() {
             <p className="empty-state-desc">
               {searchTerm 
                 ? "No listings match your search query. Try typing another topic, host name, or GID."
-                : "No Google Meet sessions are currently listed in this category. Be the first to share one!"}
+                : "No meeting sessions are currently listed in this category. Be the first to share one!"}
             </p>
             {!searchTerm && (
               <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>
@@ -537,7 +537,7 @@ function App() {
         <div className="modal-overlay">
           <div className="modal-content">
             <div className="modal-header modal-header-top">
-              <h3 className="modal-title">List Your Google Meet</h3>
+              <h3 className="modal-title">List Your Meet Link</h3>
               <button className="btn-close" onClick={() => {
                 setIsModalOpen(false);
                 setFormErrors({});
@@ -549,13 +549,13 @@ function App() {
             <form onSubmit={handleSubmit}>
               <div className="modal-body">
                 {formErrors.general && (
-                  <div style={{ backgroundColor: 'var(--google-red-light)', color: 'var(--google-red)', padding: '10px 14px', borderRadius: '8px', fontSize: '13px', display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '16px' }}>
+                  <div style={{ backgroundColor: 'var(--brand-red-light)', color: 'var(--brand-red)', padding: '10px 14px', borderRadius: '8px', fontSize: '13px', display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '16px' }}>
                     <AlertCircle size={16} /> {formErrors.general}
                   </div>
                 )}
 
                 <div className="form-group">
-                  <label className="form-label">Ambassador Name</label>
+                  <label className="form-label">Member Name</label>
                   <input 
                     type="text" 
                     name="name" 
@@ -569,7 +569,7 @@ function App() {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Ambassador GID (ID)</label>
+                  <label className="form-label">Member GID (ID)</label>
                   <input 
                     type="text" 
                     name="gid" 
@@ -579,14 +579,14 @@ function App() {
                     onChange={handleInputChange}
                     disabled={submitting}
                   />
-                  <span className="form-tip">Provide your unique Google Student Ambassador GID.</span>
+                  <span className="form-tip">Provide your unique College Networks GID.</span>
                   {formErrors.gid && <span className="error-text">{formErrors.gid}</span>}
                 </div>
 
 
 
                 <div className="form-group">
-                  <label className="form-label">Google Meet Link</label>
+                  <label className="form-label">Meet Link</label>
                   <input 
                     type="text" 
                     name="meetLink" 
@@ -596,7 +596,7 @@ function App() {
                     onChange={handleInputChange}
                     disabled={submitting}
                   />
-                  <span className="form-tip">Only Google Meet URLs are accepted. Instagram/LinkedIn links are blocked.</span>
+                  <span className="form-tip">Only meet.google.com URLs are accepted. Instagram/LinkedIn links are blocked.</span>
                   {formErrors.meetLink && <span className="error-text">{formErrors.meetLink}</span>}
                 </div>
 
@@ -635,7 +635,7 @@ function App() {
                 {formErrors.timing && <span className="error-text" style={{ marginTop: '-8px', display: 'block', marginBottom: '16px' }}>{formErrors.timing}</span>}
 
                 <div className="form-group">
-                  <label className="form-label">Approx. Duration (minutes) <span style={{ color: 'var(--google-red)', fontSize: '11px', fontWeight: 'normal' }}>*approx</span></label>
+                  <label className="form-label">Approx. Duration (minutes) <span style={{ color: 'var(--brand-red)', fontSize: '11px', fontWeight: 'normal' }}>*approx</span></label>
                   <input 
                     type="number" 
                     name="duration" 
@@ -686,7 +686,7 @@ function App() {
         {toasts.map((toast) => (
           <div className={`toast ${toast.type}`} key={toast.id}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              {toast.type === 'success' ? <CheckCircle size={16} style={{ color: 'var(--google-green)' }} /> : <AlertCircle size={16} style={{ color: 'var(--google-red)' }} />}
+              {toast.type === 'success' ? <CheckCircle size={16} style={{ color: 'var(--brand-green)' }} /> : <AlertCircle size={16} style={{ color: 'var(--brand-red)' }} />}
               <span>{toast.message}</span>
             </div>
             <button className="toast-close" onClick={() => setToasts(prev => prev.filter(t => t.id !== toast.id))}>
@@ -698,9 +698,9 @@ function App() {
 
       {/* Footer */}
       <footer className="footer">
-        <p>Google Student Ambassador Program • Meet Link Portal</p>
+        <p>College Networks • Meet Link Portal</p>
         <p style={{ fontSize: '11px' }}>
-          This tool is designed to prevent chat spam and ensure structured scheduling. Created for <span className="brand">Google Student Ambassadors</span>.
+          This tool is designed to prevent chat spam and ensure structured scheduling. Created for <span className="brand">College Network Members</span>.
         </p>
       </footer>
       

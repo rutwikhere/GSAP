@@ -94,7 +94,7 @@ export const submitMeet = async (meetData) => {
       );
 
       if (duplicateExists) {
-        throw new Error("This Google Meet link has already been registered!");
+        throw new Error("This Meet link has already been registered!");
       }
 
       // 2. Insert record
@@ -120,7 +120,7 @@ export const submitMeet = async (meetData) => {
     );
 
     if (duplicateExists) {
-      throw new Error("This Google Meet link has already been registered!");
+      throw new Error("This Meet link has already been registered!");
     }
 
     // 2. Insert record
