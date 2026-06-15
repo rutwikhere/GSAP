@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /meets/{meetId} {
+      // Allow public read access so everyone can view scheduled meets
+      allow read: if true;
+      
+      // Allow creation of new meets, but enforce strict schema validation
+      allow create: if request.resource.data.name is string 
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.name.size() < 100
+                    
+                    && request.resource.data.gid is string 
+                    && request.resource.data.gid.size() > 0
+                    && request.resource.data.gid.size() < 50
+                    
+                    && request.resource.data.meetLink is string 
+                    && request.resource.data.meetLink.matches('^https://meet\\.google\\.com/[a-z0-9-]+$')
+                    
+                    && request.resource.data.timing is string 
+                    && request.resource.data.timing.size() > 0
+                    
+                    && request.resource.data.duration is int
+                    && request.resource.data.duration >= 15
+                    && request.resource.data.duration <= 480
+                    
+                    && request.resource.data.createdAt != null;
+                    
+      // Strictly deny any updates or deletions from client-side SDKs
+      allow update, delete: if false;
+    }
+  }
+}
