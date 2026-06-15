@@ -35,68 +35,11 @@ if (hasFirebaseConfig) {
 // --- LocalStorage Mock Database Helpers ---
 const STORAGE_KEY = "gsap_meets_database";
 
-const getRelativeISOString = (minutesOffset) => {
-  const d = new Date();
-  d.setMinutes(d.getMinutes() + minutesOffset);
-  return d.toISOString();
-};
-
-const getDefaultMockMeets = () => {
-  return [
-    {
-      id: "mock-meet-1",
-      name: "Rohit Deshmukh",
-      gid: "GID-2026-4012",
-      meetLink: "https://meet.google.com/abc-defg-hij",
-      timing: getRelativeISOString(-15), // Started 15 mins ago (LIVE)
-      duration: 90, // 1.5 hours
-      createdAt: new Date(Date.now() - 3600000).toISOString()
-    },
-    {
-      id: "mock-meet-2",
-      name: "Aisha Patel",
-      gid: "GID-2026-9054",
-      meetLink: "https://meet.google.com/xyz-uvwx-yza",
-      timing: getRelativeISOString(15), // Starting in 15 mins (STARTING SOON)
-      duration: 60, // 1 hour
-      createdAt: new Date(Date.now() - 1800000).toISOString()
-    },
-    {
-      id: "mock-meet-3",
-      name: "Arjun Verma",
-      gid: "GID-2026-7832",
-      meetLink: "https://meet.google.com/qwe-rtyu-iop",
-      timing: getRelativeISOString(120), // Starting in 2 hours (UPCOMING)
-      duration: 120, // 2 hours
-      createdAt: new Date(Date.now() - 900000).toISOString()
-    },
-    {
-      id: "mock-meet-4",
-      name: "Sanya Gupta",
-      gid: "GID-2026-1122",
-      meetLink: "https://meet.google.com/mnb-vcxz-lkj",
-      timing: getRelativeISOString(1440), // Starting in 24 hours (UPCOMING tomorrow)
-      duration: 60, // 1 hour
-      createdAt: new Date().toISOString()
-    },
-    {
-      id: "mock-meet-5",
-      name: "Kabir Mehta",
-      gid: "GID-2026-3344",
-      meetLink: "https://meet.google.com/poi-uytr-ewq",
-      timing: getRelativeISOString(-180), // Concluded 3 hours ago
-      duration: 60, // 1 hour
-      createdAt: new Date(Date.now() - 14400000).toISOString()
-    }
-  ];
-};
-
 const getLocalStorageMeets = () => {
   const data = localStorage.getItem(STORAGE_KEY);
   if (!data) {
-    const defaultData = getDefaultMockMeets();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultData));
-    return defaultData;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
+    return [];
   }
   return JSON.parse(data);
 };
